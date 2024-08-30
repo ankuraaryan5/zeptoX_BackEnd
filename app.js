@@ -6,10 +6,11 @@ import cors from "cors";
 config({ path: "./config/config.env" });
 export const app = express();
 app.use(cors(
+  {
   origin: [process.env.FRONTEND_URL],
     methods: ['GET', 'POST'],
     credentials: true,
-));
+  }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
