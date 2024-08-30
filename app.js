@@ -13,9 +13,9 @@ app.use(cors(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", paymentRoute);
+app.use("api", paymentRoute);
 
-app.get("/api/getkey", (req, res) =>
+app.get("api/getkey", (req, res) =>
   res.status(200).json({ key: process.env.RAZORPAY_API })
 );
 app.get("/", (req, res) =>
