@@ -7,7 +7,12 @@ export const checkout = async (req, res) => {
     currency: "INR",
     receipt: "order_rcptid_11",
   };
-  const order = await instance.orders.create(options);
+  let order = "";
+  try {
+    order = await instance.orders.create(options);
+  } catch (err) {
+    console.error(err);
+  }
 
   res.status(200).json({ success: true, order });
 };
@@ -25,9 +30,9 @@ export const paymentVerification = async (req, res) => {
   const isAuthentic = expectedSignature === razorpay_signature;
 
   if (isAuthentic) {
-    
+
     res.redirect(`${process.env.FRONTEND_URL}/login?referenceid=${razorpay_payment_id}`)
   } else {
-    res.status(403).json({success: false})
+    res.status(403).json({ success: false })
   }
 };
